@@ -3,25 +3,29 @@ kind: ReplicationController
 metadata:
   labels:
     db: rethinkdb
-  name: rethinkdb-proxy
+  name: rethinkdb-replica-2
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     db: rethinkdb
-    role: proxy
+    role: replica
+    instance: two
   template:
     metadata:
       labels:
         db: rethinkdb
-        role: proxy
+        role: replica
+        instance: two
     spec:
       containers:
       - image: us.gcr.io/dray-app/rethinkdb:2.3.0
+        command:
+          - "/usr/bin/run.sh"
+          - "--server-name"
+          - "replica_2"
         imagePullPolicy: Always
         name: rethinkdb
         env:
-        - name: PROXY
-          value: "true"
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
@@ -34,8 +38,10 @@ spec:
         - containerPort: 29015
           name: cluster-port
         volumeMounts:
-        - mountPath: /data/rethinkdb_data
+        - mountPath: /data
           name: rethinkdb-storage
       volumes:
-      - name: rethinkdb-storage
-        emptyDir: {}
+      - gcePersistentDisk:
+          fsType: ext4
+          pdName: rethinkdb-storage-stage-2
+        name: rethinkdb-storage

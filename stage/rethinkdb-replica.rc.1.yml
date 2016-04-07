@@ -18,7 +18,7 @@ spec:
         instance: one
     spec:
       containers:
-      - image: rosskukulinski/rethinkdb-kubernetes:2.2.5
+      - image: us.gcr.io/dray-app/rethinkdb:2.3.0
         command:
           - "/usr/bin/run.sh"
           - "--server-name"
@@ -43,5 +43,5 @@ spec:
       volumes:
       - gcePersistentDisk:
           fsType: ext4
-          pdName: rethinkdb-storage-1
+          pdName: rethinkdb-storage-stage-1
         name: rethinkdb-storage
