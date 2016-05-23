@@ -1,4 +1,4 @@
-FROM rethinkdb:2.3.0
+FROM rethinkdb:2.3.2
 
 MAINTAINER Anthony Sutardja <anthony@draytechnologies.com>
 

@@ -16,7 +16,7 @@ spec:
         role: replica
     spec:
       containers:
-      - image: us.gcr.io/dray-app/rethinkdb:2.2.5
+      - image: us.gcr.io/dray-app/rethinkdb:2.3.2
         imagePullPolicy: Always
         name: rethinkdb
         env:
