@@ -18,7 +18,7 @@ spec:
         instance: three
     spec:
       containers:
-      - image: us.gcr.io/dray-app/rethinkdb:2.3.0
+      - image: us.gcr.io/dray-app/rethinkdb:2.3.2
         command:
           - "/usr/bin/run.sh"
           - "--server-name"
